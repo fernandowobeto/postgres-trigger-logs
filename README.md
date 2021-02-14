@@ -31,6 +31,18 @@ CREATE TABLE logs (
 );
 ```
 
+###Json diff to increase the trigger function
+```sql
+CREATE OR REPLACE FUNCTION json_diff(l JSONB, r JSONB) RETURNS JSONB AS
+$json_diff$
+    SELECT jsonb_object_agg(a.key, a.value) FROM
+        ( SELECT key, value FROM jsonb_each(l) ) a LEFT OUTER JOIN
+        ( SELECT key, value FROM jsonb_each(r) ) b ON a.key = b.key
+    WHERE a.value != b.value OR b.key IS NULL;
+$json_diff$
+    LANGUAGE sql;
+```
+
 ###Trigger
 ```sql
 CREATE OR REPLACE function public.log() returns trigger
