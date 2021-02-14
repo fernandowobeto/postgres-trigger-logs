@@ -1,6 +1,6 @@
 # Postgres logs using trigger
 
-##Table to save logs
+###Table to save logs
 ```sql
 CREATE TABLE clientes (
     id serial NOT NULL
@@ -14,7 +14,7 @@ CREATE TABLE clientes (
 );
 ```
 
-##Log Table
+###Log Table
 ```sql
 CREATE TABLE logs (
     id serial NOT NULL
@@ -31,7 +31,7 @@ CREATE TABLE logs (
 );
 ```
 
-##Json diff to increase the trigger function
+###Json diff to increase the trigger function
 ```sql
 CREATE OR REPLACE FUNCTION json_diff(l JSONB, r JSONB) RETURNS JSONB AS
 $json_diff$
@@ -43,7 +43,7 @@ $json_diff$
     LANGUAGE sql;
 ```
 
-##Trigger
+###Trigger
 ```sql
 CREATE OR REPLACE function public.log() returns trigger
     language plpgsql
@@ -101,7 +101,7 @@ END;
 $$;
 ```
 
-##Define trigger in table
+###Define trigger in table
 ```sql
 CREATE TRIGGER trigge_log
     AFTER INSERT OR UPDATE OR DELETE
