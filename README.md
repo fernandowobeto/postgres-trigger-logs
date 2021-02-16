@@ -64,8 +64,8 @@ BEGIN
                     TG_TABLE_NAME::TEXT,
                     session_user::TEXT,
                     'U',
-                    old_data,
-                    new_data,
+                    json_diff(old_data, new_data),
+                    json_diff(new_data, old_data),
                     current_query()
             );
         END IF;
