@@ -109,3 +109,10 @@ CREATE TRIGGER trigge_log
     FOR EACH ROW
 EXECUTE PROCEDURE log();
 ```
+
+### Definindo variáveis de sessão no postgres para utilização nas triggers
+```sql
+SET SESSION "application.id_usuario" = 366; -- setando
+
+SELECT current_setting('application.id_usuario') AS value; -- resgatando
+```
